@@ -51,41 +51,96 @@ function App() {
   const chart: any = useRef(null);
 
   useLayoutEffect(() => {
-    let x = am4core.create("chartdiv", am4charts.XYChart);
+    let chart = am4core.create("chartdiv", am4charts.TreeMap);
 
-    x.paddingRight = 20;
 
-    let data: any = [];
-    let visits = 10;
 
-    for (let i = 1; i < 366; i++) {
-      visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-      data.push({ date: (new Date(2018, 0, i)), name: "name" + i, value: visits });
-    }
+    chart.data = [{
+"name": "First",
+  "children": [
+    {
+      "name": "A1",
+      "children": [
+        { "name": "A1-1", "value": 687 },
+        { "name": "A1-2", "value": 148 }
+      ]
+    },
+    {
+      "name": "A2",
+      "children": [
+        { "name": "A2-1", "value": 220 },
+        { "name": "A2-2", "value": 480 },
+        { "name": "A2-3", "value": 150 }
+      ]
+    },
+    {
+      "name": "A3",
+      "children": [
+        { "name": "A3-1", "value": 200 },
+        { "name": "A3-2", "value": 320 }
+      ]
+    },
+  ]
+}, {
+  "name": "Second",
+  "children": [
+    {
+      "name": "B1",
+      "children": [
+        { "name": "B1-1", "value": 220 },
+        { "name": "B1-2", "value": 150 },
+        { "name": "B1-3", "value": 199 },
+        { "name": "B1-4", "value": 481 }
+      ]
+    },
+    {
+      "name": "B2",
+      "children": [
+        { "name": "B2-1", "value": 210 },
+        { "name": "B2-3", "value": 150 }
+      ]
+    },
+    {
+      "name": "B3",
+      "children": [
+        { "name": "B3-1", "value": 320 },
+        { "name": "B3-2", "value": 310 }
+      ]
+    },
+  ]
+    }];
+    chart.maxLevels = 1;
+    chart.colors.step = 2;
+    chart.dataFields.value = "value";
+    chart.dataFields.name = "name";
+      
+    chart.dataFields.children = "children";
+    var level1 = chart.seriesTemplates.create("0");
+var level1_bullet = level1.bullets.push(new am4charts.LabelBullet());
+level1_bullet.locationY = 0.5;
+level1_bullet.locationX = 0.5;
+level1_bullet.label.text = "{name}";
+level1_bullet.label.fill = am4core.color("#fff");
 
-    x.data = data;
+var level2 = chart.seriesTemplates.create("1");
+var level2_bullet = level2.bullets.push(new am4charts.LabelBullet());
+level2_bullet.locationY = 0.5;
+level2_bullet.locationX = 0.5;
+level2_bullet.label.text = "{name}";
+level2_bullet.label.fill = am4core.color("#fff");
 
-    let dateAxis = x.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.grid.template.location = 0;
+var level3 = chart.seriesTemplates.create("2");
+var level3_bullet = level3.bullets.push(new am4charts.LabelBullet());
+level3_bullet.locationY = 0.5;
+level3_bullet.locationX = 0.5;
+level3_bullet.label.text = "{name}";
+level3_bullet.label.fill = am4core.color("#fff");
 
-    let valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
-
-    let series = x.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = "date";
-    series.dataFields.valueY = "value";
-    series.tooltipText = "{valueY.value}";
-    x.cursor = new am4charts.XYCursor();
-
-    let scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    x.scrollbarX = scrollbarX;
-
-    chart.current = x;
-
+/* Navigation bar */
+chart.homeText = "TOP";
+chart.navigationBar = new am4charts.NavigationBar();
     return () => {
-      x.dispose();
+      chart.dispose();
     };
   }, []);
   useEffect(()=>{
