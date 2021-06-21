@@ -15,60 +15,61 @@ function App() {
     let dead = {};
     let unknown = {};
     for (let i = 0; i < Creatures.length; i++) {
-      const creature: any = Creatures[i];
-      if (creature.status === "alive") {
-          if (creature.taxonomy[0] in alive) {
-            if (creature.taxonomy[1] in alive[creature.taxonomy[0]]) {
-              if (creature.taxonomy[2] in alive[creature.taxonomy[0]][creature.taxonomy[1]] ) {
-                alive[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]]++;
+      const creature: any = Creatures[i].taxonomy;
+      const creature_status: any = Creatures[i].status;
+      if (creature_status === "alive") {
+          if (creature[0] in alive) {
+            if (creature[1] in alive[creature[0]]) {
+              if (creature[2] in alive[creature[0]][creature[1]] ) {
+                alive[creature[0]][creature[1]][creature[2]]++;
               } else {
-                alive[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+                alive[creature[0]][creature[1]][creature[2]] = 1;
               }
             } else {
-              alive[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-              alive[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+              alive[creature[0]][creature[1]] = {};
+              alive[creature[0]][creature[1]][creature[2]] = 1;
             }
             
           } else {
-            alive[creature.taxonomy[0]] = {};
-            alive[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-            alive[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+            alive[creature[0]] = {};
+            alive[creature[0]][creature[1]] = {};
+            alive[creature[0]][creature[1]][creature[2]] = 1;
           }
-      } else if (creature.status === "dead") {
-          if (creature.taxonomy[0] in dead) {
-            if (creature.taxonomy[1] in dead[creature.taxonomy[0]]) {
-              if (creature.taxonomy[2] in dead[creature.taxonomy[0]][creature.taxonomy[1]] ) {
-                dead[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]]++;
+      } else if (creature_status === "dead") {
+          if (creature[0] in dead) {
+            if (creature[1] in dead[creature[0]]) {
+              if (creature[2] in dead[creature[0]][creature[1]] ) {
+                dead[creature[0]][creature[1]][creature[2]]++;
               } else {
-                dead[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+                dead[creature[0]][creature[1]][creature[2]] = 1;
               }
             } else {
-              dead[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-              dead[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+              dead[creature[0]][creature[1]] = {};
+              dead[creature[0]][creature[1]][creature[2]] = 1;
             }
             
           } else {
-            dead[creature.taxonomy[0]] = {};
-            dead[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-            dead[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+            dead[creature[0]] = {};
+            dead[creature[0]][creature[1]] = {};
+            dead[creature[0]][creature[1]][creature[2]] = 1;
           }
-      } else if (creature.status === "unknown") {
-          if (creature.taxonomy[0] in unknown) {
-            if (creature.taxonomy[1] in unknown[creature.taxonomy[0]]) {
-              if (creature.taxonomy[2] in unknown[creature.taxonomy[0]][creature.taxonomy[1]] ) {
-                unknown[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]]++;
+      } else if (creature_status === "unknown") {
+          if (creature[0] in unknown) {
+            if (creature[1] in unknown[creature[0]]) {
+              if (creature[2] in unknown[creature[0]][creature[1]] ) {
+                unknown[creature[0]][creature[1]][creature[2]]++;
               } else {
-                unknown[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+                unknown[creature[0]][creature[1]][creature[2]] = 1;
               }
             } else {
-              unknown[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-              unknown[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+              unknown[creature[0]][creature[1]] = {};
+              unknown[creature[0]][creature[1]][creature[2]] = 1;
             }
             
           } else {
-            unknown[creature.taxonomy[0]] = {};
-            unknown[creature.taxonomy[0]][creature.taxonomy[1]] = {};
-            unknown[creature.taxonomy[0]][creature.taxonomy[1]][creature.taxonomy[2]] = 1;
+            unknown[creature[0]] = {};
+            unknown[creature[0]][creature[1]] = {};
+            unknown[creature[0]][creature[1]][creature[2]] = 1;
           }
       }
     }
