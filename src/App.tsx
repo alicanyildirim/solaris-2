@@ -75,7 +75,6 @@ function App() {
           }
       }
     }
-    console.log(alive,dead,unknown);
    
     // Log Time: new Date(Creatures[0][0]).toDateString()
     return {alive, dead, unknown}
@@ -89,6 +88,7 @@ function App() {
           obj["children"].push({"name": Object.keys(layer0)[j], "children": []});
           const layer1: any = Object.values(layer0)[j];
           for (let z = 0; z < Object.keys(layer1).length; z++) {
+            console.log(Object.keys(layer1)[z]);
             obj["children"][j]["children"].push({"name": Object.keys(layer1)[z], "value": Object.values(layer1)[z]});
           }
         }
@@ -115,10 +115,9 @@ function App() {
         "name": "Unknown",
         "children": unknownArr
       }
-
     ];
     chart.maxLevels = 1;
-    chart.colors.step = 2;
+    //chart.colors.step = 2;
     chart.dataFields.value = "value";
     chart.dataFields.name = "name";
       
@@ -143,6 +142,13 @@ function App() {
     level3_bullet.locationX = 0.5;
     level3_bullet.label.text = "{name}";
     level3_bullet.label.fill = am4core.color("#fff");
+    
+    var level4 = chart.seriesTemplates.create("3");
+    var level4_bullet = level4.bullets.push(new am4charts.LabelBullet());
+    level4_bullet.locationY = 0.5;
+    level4_bullet.locationX = 0.5;
+    level4_bullet.label.text = "{name}";
+    level4_bullet.label.fill = am4core.color("#fff");
 
     /* Navigation bar */
     chart.homeText = "Species Status";
@@ -154,7 +160,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-           <div id="chartdiv" style={{ width: "90%", height: "500px" }}></div>
+           <div id="chartdiv" style={{ width: "80%", height: "400px" }}></div>
       </header>
     </div>
   );
