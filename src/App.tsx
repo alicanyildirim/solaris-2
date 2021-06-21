@@ -7,9 +7,6 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 am4core.useTheme(am4themes_animated);
 function App() {
-  const addData = (status) => {
-
-  }
   const showData=()=>{
     let cs: any = Creatures;
     let creatures: any = cs[cs.length -1][1];
@@ -160,7 +157,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-           <div id="chartdiv" style={{ width: "80%", height: "400px" }}></div>
+           <h3>Solaris-2 Report</h3>
+           <section>
+             Considering only the last day of the log, scientists can see the treemap representation of the data acquired.
+           </section>
+           <div id="chartdiv" style={{ width: "90%", height: "450px" }}></div>
       </header>
     </div>
   );
